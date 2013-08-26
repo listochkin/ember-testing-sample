@@ -22,6 +22,11 @@ App.NotificationsController = Ember.ArrayController.extend({
                 notification.set('isRead', true);
             }
         }, this);
+    },
+
+    remove: function (notification) {
+        this.removeObject(notification);
+        notification.deleteRecord();
     }
 });
 

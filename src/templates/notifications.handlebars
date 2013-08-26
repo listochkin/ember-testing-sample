@@ -3,6 +3,7 @@
 	<li>
 		<p data-test="title">{{notification.title}}</p>
 		<p data-test="isRead">{{notification.isRead}}</p>
+		<button data-test="delete" {{action "remove" notification}}>{{notification.isRead}}</button>
 	</li>
 	{{/each}}
 </ul>

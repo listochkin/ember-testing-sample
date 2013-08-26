@@ -27,4 +27,10 @@ describe('Notifications', function () {
             expect(first).to.equal("true");
         });
     });
+
+    it('Should remove notification', function () {
+        visit('/notifications').click('[data-test="delete"]:first').then(function () {
+            expect(find('ul li').length).to.equal(3);
+        });
+    });
 });
