@@ -45,4 +45,10 @@ describe('Notifications', function () {
             expect(find('[data-test="unread"]')[0].innerText).to.equal('3');
         });
     });
+
+    it('Should show unread counter on other routes', function () {
+        visit('/').then(function () {
+            expect(find('[data-test="notifications"]')[0].innerText).to.equal('4');
+        });
+    });
 });

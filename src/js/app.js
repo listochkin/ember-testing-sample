@@ -34,6 +34,10 @@ App.NotificationsController = Ember.ArrayController.extend({
     }.property('this.@each.isRead')
 });
 
+App.IndexController = Ember.Controller.extend({
+    needs: 'notifications'
+});
+
 App.Store = DS.Store.extend({
     adapter: DS.FixtureAdapter.create()
 });
