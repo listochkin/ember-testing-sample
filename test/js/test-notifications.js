@@ -33,4 +33,16 @@ describe('Notifications', function () {
             expect(find('ul li').length).to.equal(3);
         });
     });
+
+    it('Should show the unread counter', function () {
+        visit('/notifications').then(function () {
+            expect(find('[data-test="unread"]')[0].innerText).to.equal('4');
+        }).then(function () {
+            var notification = App.Notification.find(1);
+            notification.set('isRead', true);
+            return wait();
+        }).then(function () {
+            expect(find('[data-test="unread"]')[0].innerText).to.equal('3');
+        });
+    });
 });

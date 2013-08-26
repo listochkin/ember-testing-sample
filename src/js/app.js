@@ -27,7 +27,11 @@ App.NotificationsController = Ember.ArrayController.extend({
     remove: function (notification) {
         this.removeObject(notification);
         notification.deleteRecord();
-    }
+    },
+
+    unread: function () {
+        return this.filterProperty('isRead', false).length;
+    }.property('this.@each.isRead')
 });
 
 App.Store = DS.Store.extend({
