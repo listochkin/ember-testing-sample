@@ -11,9 +11,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'src/js/libs/jquery-*.js',
+      'src/js/libs/handlebars-*.js',
+      'src/js/libs/ember-*.js',
+      'src/js/**.js',
       'test/js/libs/*.js',
       'test/js/helpers/*.js',
-      'test/js/*.js'
+      'test/js/*.js',
+      'src/templates/**.handlebars'
     ],
 
 
@@ -62,7 +67,11 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: false,
+
+    preprocessors: {
+      '**/*.handlebars': 'ember'
+    }
 
   });
 };

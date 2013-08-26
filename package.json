@@ -16,6 +16,7 @@
     "url": "https://github.com/listochkin/ember-testing-sample/issues"
   },
   "devDependencies": {
-    "karma-mocha": "*"
+    "karma-mocha": "*",
+    "karma-ember-preprocessor": "*"
   }
 }
