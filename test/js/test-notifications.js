@@ -17,4 +17,14 @@ describe('Notifications', function () {
             expect(find('[data-test="title"]').length).to.equal(4);
         });
     });
+
+    it('Should mark notifications as read', function () {
+        visit('/notifications').then(function () {
+            var first = find('[data-test="isRead"]')[0].innerText;
+            expect(first).to.equal("false");
+        }).visit('/').visit('/notifications').then(function () {
+            var first = find('[data-test="isRead"]')[0].innerText;
+            expect(first).to.equal("true");
+        });
+    });
 });
