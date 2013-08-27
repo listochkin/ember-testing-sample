@@ -1,4 +1,6 @@
-App = Ember.Application.create();
+'use strict';
+
+window.App = Ember.Application.create();
 
 App.Router.map(function() {
     this.resource('notifications');
@@ -19,14 +21,22 @@ App.NotificationsController = Ember.ArrayController.extend({
     markAsRead: function () {
         this.forEach(function action(notification) {
             if (!notification.get('isRead')) {
+                var store = notification.get('store');
+                var transaction = store.transaction();
+                transaction.add(notification);
                 notification.set('isRead', true);
+                transaction.commit();
             }
         }, this);
     },
 
     remove: function (notification) {
         this.removeObject(notification);
+        var store = notification.get('store');
+        var transaction = store.transaction();
+        transaction.add(notification);
         notification.deleteRecord();
+        transaction.commit();
     },
 
     unread: function () {
@@ -38,18 +48,15 @@ App.IndexController = Ember.Controller.extend({
     needs: 'notifications'
 });
 
+App.Adapter = DS.RESTAdapter.extend({
+    namespace: 'api/1.0'
+});
+
 App.Store = DS.Store.extend({
-    adapter: DS.FixtureAdapter.create()
+    adapter: 'App.Adapter'
 });
 
 App.Notification = DS.Model.extend({
     title: DS.attr('string'),
     isRead: DS.attr('boolean')
 });
-
-App.Notification.FIXTURES = [
-    { id: 1, title: 'Notification 1', isRead: false },
-    { id: 2, title: 'Notification 2', isRead: false },
-    { id: 3, title: 'Notification 3', isRead: false },
-    { id: 4, title: 'Notification 4', isRead: false }
-];
